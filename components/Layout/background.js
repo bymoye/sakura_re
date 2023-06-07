@@ -62,11 +62,21 @@ const SvgBackground = () => {
       image.setAttribute("height", "102%");
       image.setAttribute("width", "102%");
       image.setAttribute("preserveAspectRatio", "xMidYMid slice");
-      image.style.opacity = "0";
-      image.style.transition = "opacity 2s";
       image.style.filter = "url(#svg_blurfilter)";
       return image;
     };
+
+    const createAnimate = () => {
+      const animate = document.createElementNS(namespaceURI, "animate");
+      animate.setAttribute("attributeName", "opacity");
+      animate.setAttribute("from", "0");
+      animate.setAttribute("to", "1");
+      animate.setAttribute("dur", "2s");
+      animate.setAttribute("begin", "null");
+      animate.setAttribute("repeatCount", "1");
+      animate.setAttribute("fill", "freeze");
+      return animate;
+    }
 
     const addEvent = () => {
       const background = () => {
@@ -81,20 +91,17 @@ const SvgBackground = () => {
             : currentIndexRef.current + 1;
         const currentImage = imageListRef.current[currentIndexRef.current];
         const previousImage = svg.querySelector("image");
-
-        previousImage.style.opacity = "0";
-
-        setTimeout(() => {
-          previousImage.remove();
-        }, 2000);
-
+        const animate = createAnimate();
         svg.appendChild(currentImage);
+        currentImage.appendChild(animate);
+        animate.beginElement();
 
-        setTimeout(() => {
-          currentImage.style.opacity = "1";
-        }, 0);
+        animate.addEventListener("endEvent", function _event(){
+          animate.remove();
+          previousImage.remove();
+          animate.removeEventListener("endEvent", _event);
+        })
       };
-
       timerRef.current = setInterval(background, 5000);
 
       document.addEventListener("visibilitychange", () => {
@@ -155,7 +162,6 @@ const SvgBackground = () => {
         y="-5"
         height="102%"
         width="102%"
-        style={{ opacity: "1", transition: "opacity 2s" }}
         preserveAspectRatio="xMidYMid slice"
         filter="url(#svg_blurfilter)"
       ></image>
