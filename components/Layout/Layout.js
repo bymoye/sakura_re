@@ -4,11 +4,6 @@ import Head from "next/head";
 import Navigation from "../Navigation";
 import styles from "../../styles/Layout.module.css";
 import SvgBackground from "./background";
-const images = [
-  "https://fp1.fghrsh.net/2020/01/14/7249e2902b45b4620019519a82db1d2e.jpg!q80.webp",
-  "https://fp1.fghrsh.net/2020/01/14/bb445e2a101bbf5a4ca017782dd73b89.jpg!q80.webp",
-  "https://fp1.fghrsh.net/2020/01/14/4939be2513c620c6c15b057b3137307e.jpg!q80.webp",
-];
 const Layout = ({ children }) => {
   const [shouldAddStyle, setShouldAddStyle] = useState(false);
   useEffect(() => {

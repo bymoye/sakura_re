@@ -20,15 +20,10 @@ const SvgBackground = () => {
     const scrollTop =
       document.documentElement.scrollTop || document.body.scrollTop;
 
-    if (scrollTop > 100 && stdDeviationRef.current < 5) {
-      stdDeviationRef.current = parseFloat(
-        (stdDeviationRef.current + 0.1).toFixed(1)
-      );
-    } else if (scrollTop < 100 && stdDeviationRef.current > 0) {
-      stdDeviationRef.current = parseFloat(
-        (stdDeviationRef.current - 0.1).toFixed(1)
-      );
-    }
+    const delta = scrollTop > 100 ? 0.1 : -0.1;
+    stdDeviationRef.current = parseFloat(
+      (stdDeviationRef.current + delta).toFixed(1)
+    );
     setStdDeviation(stdDeviationRef.current);
 
     if (_blur_check(scrollTop)) {
@@ -76,19 +71,26 @@ const SvgBackground = () => {
       animate.setAttribute("repeatCount", "1");
       animate.setAttribute("fill", "freeze");
       return animate;
-    }
+    };
 
     const addEvent = () => {
+      /// 打开定时器
+      const startTimer = () => {
+        timerRef.current = setInterval(background, 5000);
+      };
+      /// 关闭定时器
+      const stopTimer = () => {
+        clearInterval(timerRef.current);
+      };
+      /// 切换背景
       const background = () => {
         if (imageListRef.current.length === 0) {
-          clearInterval(timerRef.current);
+          stopTimer();
           return;
         }
 
         currentIndexRef.current =
-          currentIndexRef.current === imageListRef.current.length - 1
-            ? 0
-            : currentIndexRef.current + 1;
+          (currentIndexRef.current + 1) % imageListRef.current.length;
         const currentImage = imageListRef.current[currentIndexRef.current];
         const previousImage = svg.querySelector("image");
         const animate = createAnimate();
@@ -96,20 +98,18 @@ const SvgBackground = () => {
         currentImage.appendChild(animate);
         animate.beginElement();
 
-        animate.addEventListener("endEvent", function _event(){
+        animate.addEventListener("endEvent", function _event() {
           animate.remove();
           previousImage.remove();
           animate.removeEventListener("endEvent", _event);
-        })
+        });
       };
-      timerRef.current = setInterval(background, 5000);
 
+      /// 默认开启定时器
+      startTimer();
+      /// 监听页面可见性
       document.addEventListener("visibilitychange", () => {
-        if (document.hidden) {
-          clearInterval(timerRef.current);
-        } else {
-          timerRef.current = setInterval(background, 5000);
-        }
+        document.hidden ? stopTimer() : startTimer();
       });
     };
 
