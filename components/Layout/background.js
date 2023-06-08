@@ -5,9 +5,9 @@ const SvgBackground = () => {
   const imageListRef = useRef([]);
   const currentIndexRef = useRef(0);
   const timerRef = useRef(null);
+  const timerRef2 = useRef(null);
   const [stdDeviation, setStdDeviation] = useState(0);
   const stdDeviationRef = useRef(0);
-  const timerRef2 = useRef(null);
 
   const _blur_check = (scrollTop) => {
     return (
@@ -44,6 +44,15 @@ const SvgBackground = () => {
       requestAnimationFrame(_blur);
     }
   };
+
+  useEffect(() => {
+    blur_rs();
+    window.addEventListener("scroll", blur_rs);
+
+    return () => {
+      window.removeEventListener("scroll", blur_rs);
+    };
+  }, []);
 
   useEffect(() => {
     const namespaceURI = "http://www.w3.org/2000/svg";
@@ -137,14 +146,6 @@ const SvgBackground = () => {
     });
   }, []);
 
-  useEffect(() => {
-    blur_rs();
-    window.addEventListener("scroll", blur_rs);
-
-    return () => {
-      window.removeEventListener("scroll", blur_rs);
-    };
-  }, []);
 
   return (
     <svg
