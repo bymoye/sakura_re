@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 
 const SvgBackground = () => {
-  const svgRef = useRef();
-  const imageListRef = useRef([]);
-  const currentIndexRef = useRef(0);
-  const timerRef = useRef(null);
-  const timerRef2 = useRef(null);
-  const [stdDeviation, setStdDeviation] = useState(0);
-  const stdDeviationRef = useRef(0);
+  const svgRef = useRef<SVGSVGElement>();
+  const imageListRef = useRef<Array<SVGImageElement>>([]);
+  const currentIndexRef = useRef<number>(0);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const timerRef2 = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [stdDeviation, setStdDeviation] = useState<number>(0);
+  const stdDeviationRef = useRef<number>(0);
 
-  const _blur_check = (scrollTop) => {
+  const _blur_check = (scrollTop: number) => {
     return (
       (scrollTop > 100 && stdDeviationRef.current < 5) ||
       (scrollTop <= 100 && stdDeviationRef.current > 0)
@@ -58,7 +58,7 @@ const SvgBackground = () => {
     const namespaceURI = "http://www.w3.org/2000/svg";
     const svg = svgRef.current;
 
-    const createImage = (href) => {
+    const createImage = (href: string) => {
       const image = document.createElementNS(namespaceURI, "image");
       image.setAttribute("href", href);
       image.setAttribute("x", "-5");
@@ -101,7 +101,7 @@ const SvgBackground = () => {
         currentIndexRef.current =
           (currentIndexRef.current + 1) % imageListRef.current.length;
         const currentImage = imageListRef.current[currentIndexRef.current];
-        const previousImage = svg.querySelector("image");
+        const previousImage = svg?.querySelector("image");
         const animate = createAnimate();
         svg.appendChild(currentImage);
         currentImage.appendChild(animate);
@@ -145,7 +145,6 @@ const SvgBackground = () => {
         });
     });
   }, []);
-
 
   return (
     <svg

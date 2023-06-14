@@ -1,3 +1,4 @@
+import React from "react";
 import SiteCover from "../components/Cover";
 import Layout from "../components/Layout/Layout";
 import ArticleIndex from "../components/article_index";

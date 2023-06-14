@@ -35,7 +35,7 @@ const Layout = ({ children }) => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>Sakura_re</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navigation />
@@ -43,7 +43,7 @@ const Layout = ({ children }) => {
         <SvgBackground />
         {children}
       </main>
-      {/* 可以在这里添加页脚组件 */}
+      {/* footer */}
     </div>
   );
 };

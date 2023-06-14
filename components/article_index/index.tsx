@@ -1,7 +1,6 @@
 import styles from "../../styles/ArticleIndex.module.css";
 import Article from "./Article";
 const ArticleIndex = () => {
-  /// 伪造数据
   const data = [
     {
       id: 1,
