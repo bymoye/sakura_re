@@ -1,11 +1,12 @@
 import { useEffect, useRef } from "react";
 import styles from "@/styles/Navigation.module.css";
+import debounce from "./utils/debounce";
 
 const Navigation = () => {
   const navRef = useRef(null); // 获取 DOM 节点
 
   useEffect(() => {
-    const handleScroll = () => {
+    const updateProgress = () => {
       const scrollPosition = window.scrollY; // 获取滚动位置
       if (scrollPosition > 20) {
         navRef.current.classList.add(styles.ceil_nav);
@@ -13,6 +14,8 @@ const Navigation = () => {
         navRef.current.classList.remove(styles.ceil_nav);
       }
     };
+
+    const handleScroll = debounce(updateProgress, 100);
 
     window.addEventListener("scroll", handleScroll); // 监听页面滚动事件
 

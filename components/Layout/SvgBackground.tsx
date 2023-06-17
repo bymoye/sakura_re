@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { SvgAnimate, SvgImage } from "./svg_dom";
+import debounce from "components/utils/debounce";
 const SvgBackground = () => {
   const svgRef = useRef<SVGSVGElement>();
   const imageListRef = useRef<Array<SVGImageElement>>([]);
@@ -45,12 +46,14 @@ const SvgBackground = () => {
     }
   };
 
+  const handleScroll = debounce(blur_rs, 100);
+
   useEffect(() => {
-    blur_rs();
-    window.addEventListener("scroll", blur_rs);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener("scroll", blur_rs);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 

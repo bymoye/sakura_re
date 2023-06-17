@@ -1,4 +1,5 @@
 import styles from "@/styles/Scrollbar.module.css";
+import debounce from "components/utils/debounce";
 import { useEffect, useState } from "react";
 const Scrollbar = () => {
   const [color, setColor] = useState("#00BCD4");
@@ -23,35 +24,21 @@ const Scrollbar = () => {
       return nearestKey;
     };
 
-    let animationFrameId = null;
+    const updateProgress = () => {
+      const scrollPosition = window.scrollY;
+      const scrollHeight = document.body.scrollHeight;
+      const windowHeight = window.innerHeight;
 
-    const handleScroll = () => {
-      if (animationFrameId) {
-        return; // 防止重复调度
-      }
+      const scrollPercent = Math.round(
+        (scrollPosition / (scrollHeight - windowHeight)) * 100
+      );
+      const nearestKey = getNearestKey(scrollPercent);
 
-      const updateProgress = () => {
-        const scrollPosition = window.scrollY;
-        const scrollHeight = document.body.scrollHeight;
-        const windowHeight = window.innerHeight;
-
-        const scrollPercent =
-          (scrollPosition / (scrollHeight - windowHeight)) * 100;
-        const nearestKey = getNearestKey(scrollPercent);
-
-        setWidth(scrollPercent);
-        setColor(colorMap.get(nearestKey));
-
-        animationFrameId = null;
-      };
-
-      const requestUpdate = () => {
-        animationFrameId = requestAnimationFrame(() => {
-          updateProgress();
-        });
-      };
-      requestUpdate();
+      setWidth(scrollPercent);
+      setColor(colorMap.get(nearestKey));
     };
+
+    const handleScroll = debounce(updateProgress, 300);
 
     window.addEventListener("scroll", handleScroll);
     return () => {
