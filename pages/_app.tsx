@@ -1,6 +1,6 @@
 // _app.js (或 _app.tsx 或 _app.jsx)
 
-import "../styles/globals.css";
+import "@/styles/globals.css";
 
 import React from "react";
 

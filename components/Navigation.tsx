@@ -1,9 +1,27 @@
-import React from "react";
-import styles from "../styles/Navigation.module.css";
+import { useEffect, useRef } from "react";
+import styles from "@/styles/Navigation.module.css";
 
 const Navigation = () => {
+  const navRef = useRef(null); // 获取 DOM 节点
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY; // 获取滚动位置
+      if (scrollPosition > 20) {
+        navRef.current.classList.add(styles.ceil_nav);
+      } else {
+        navRef.current.classList.remove(styles.ceil_nav);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll); // 监听页面滚动事件
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll); // 清除事件监听
+    };
+  });
   return (
-    <nav className={styles.nav}>
+    <nav ref={navRef} className={styles.nav}>
       <ul>
         <li>
           <a href="/">Home</a>
