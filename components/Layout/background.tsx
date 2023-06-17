@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-
+import { SvgAnimate, SvgImage } from "./svg_dom";
 const SvgBackground = () => {
   const svgRef = useRef<SVGSVGElement>();
   const imageListRef = useRef<Array<SVGImageElement>>([]);
@@ -55,32 +55,7 @@ const SvgBackground = () => {
   }, []);
 
   useEffect(() => {
-    const namespaceURI = "http://www.w3.org/2000/svg";
     const svg = svgRef.current;
-
-    const createImage = (href: string) => {
-      const image = document.createElementNS(namespaceURI, "image");
-      image.setAttribute("href", href);
-      image.setAttribute("x", "-5");
-      image.setAttribute("y", "-5");
-      image.setAttribute("height", "102%");
-      image.setAttribute("width", "102%");
-      image.setAttribute("preserveAspectRatio", "xMidYMid slice");
-      image.style.filter = "url(#svg_blurfilter)";
-      return image;
-    };
-
-    const createAnimate = () => {
-      const animate = document.createElementNS(namespaceURI, "animate");
-      animate.setAttribute("attributeName", "opacity");
-      animate.setAttribute("from", "0");
-      animate.setAttribute("to", "1");
-      animate.setAttribute("dur", "2s");
-      animate.setAttribute("begin", "null");
-      animate.setAttribute("repeatCount", "1");
-      animate.setAttribute("fill", "freeze");
-      return animate;
-    };
 
     const addEvent = () => {
       /// 打开定时器
@@ -102,7 +77,7 @@ const SvgBackground = () => {
           (currentIndexRef.current + 1) % imageListRef.current.length;
         const currentImage = imageListRef.current[currentIndexRef.current];
         const previousImage = svg?.querySelector("image");
-        const animate = createAnimate();
+        const animate = SvgAnimate();
         svg.appendChild(currentImage);
         currentImage.appendChild(animate);
         animate.beginElement();
@@ -136,7 +111,7 @@ const SvgBackground = () => {
               "https://fp1.fghrsh.net/2020/01/14/4939be2513c620c6c15b057b3137307e.jpg!q80.webp",
             ];
             imgurl.unshift(svg.querySelector("image").getAttribute("href"));
-            imageListRef.current = imgurl.map((item) => createImage(item));
+            imageListRef.current = imgurl.map((item) => SvgImage(item));
             addEvent();
           }
         })

@@ -18,8 +18,7 @@ const ArticleIndex = () => {
       time: "2021-01-01",
       content: "谷歌一下，你就知道",
       category: "搜索引擎",
-      cover:
-        "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png",
+      cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
     },
   ];
   return (

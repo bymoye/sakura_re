@@ -16,13 +16,6 @@
     filter: saturate(.5) blur(0px);
 }
 
-.post_list_show{
-    opacity: 1;
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    will-change: auto;
-}
-
 .post_list_thumb{
     will-change: transform,opacity;
     margin: 20px 0 20px;
@@ -32,6 +25,13 @@
     transform: translateY(80px);
     transition: all .5s ease;
     animation: main .5s;
+}
+
+.post_list_show{
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    will-change: auto;
 }
 
 .post_content_wrap{

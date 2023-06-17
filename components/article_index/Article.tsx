@@ -1,11 +1,34 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import styles from "../../styles/Article.module.css";
+
 const Article = ({ title, time, content, category, url, cover, id }) => {
+  const articleRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add(styles.post_list_show);
+        } else {
+          entry.target.classList.remove(styles.post_list_show);
+        }
+      },
+      { threshold: 0.5 } // 视口中元素的可见度达到 50% 时触发回调函数
+    );
+
+    if (articleRef.current) {
+      observer.observe(articleRef.current);
+    }
+
+    return () => {
+      if (articleRef.current) {
+        observer.unobserve(articleRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <article
-      className={[styles.post_list_show, styles.post_list_thumb].join(" ")}
-      key={id}
-    >
+    <article ref={articleRef} className={styles.post_list_thumb} key={id}>
       <div className={styles.post_thumb}>
         <img
           src={cover}

@@ -8,10 +8,13 @@
       display: flex;
       top: 0;
       padding: 0.5rem 1rem;
-      background-color: #ffffff56;
-      box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+      background: rgba(255,255,255,.8);
+      box-shadow: 0 1px 40px -8px rgba(0,0,0,.5);
+      /* box-shadow: 0 0 10px rgb(0 0 0 / 10%); */
       justify-content: flex-end;
       align-items: center;
+      z-index: 9999;
+      right: 0;
   }
 
   
