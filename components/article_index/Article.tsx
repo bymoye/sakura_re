@@ -9,8 +9,7 @@ const Article = ({ title, time, content, category, url, cover, id }) => {
       ([entry]) => {
         if (entry.isIntersecting) {
           entry.target.classList.add(styles.post_list_show);
-        } else {
-          entry.target.classList.remove(styles.post_list_show);
+          observer.unobserve(entry.target);
         }
       },
       { threshold: 0.5 } // 视口中元素的可见度达到 50% 时触发回调函数

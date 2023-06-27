@@ -12,7 +12,7 @@ const SvgBackground = () => {
 
   const _blur_check = (scrollTop: number) => {
     return (
-      (scrollTop > 100 && stdDeviationRef.current < 5) ||
+      (scrollTop > 100 && stdDeviationRef.current < 8) ||
       (scrollTop <= 100 && stdDeviationRef.current > 0)
     );
   };
@@ -136,10 +136,10 @@ const SvgBackground = () => {
     >
       <image
         href="https://fp1.fghrsh.net/2020/01/31/34ac8d52912eb5ffa639ab23cbced140.jpg!q80.webp"
-        x="-5"
-        y="-5"
-        height="102%"
-        width="102%"
+        x="-4%"
+        y="-4%"
+        height="108%"
+        width="108%"
         preserveAspectRatio="xMidYMid slice"
         filter="url(#svg_blurfilter)"
       ></image>

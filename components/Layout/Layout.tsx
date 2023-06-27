@@ -4,7 +4,8 @@ import Navigation from "../Navigation";
 import styles from "@/styles/Layout.module.css";
 import SvgBackground from "./SvgBackground";
 import Scrollbar from "./Scrollbar";
-
+import Footer from "./Footer";
+import ToTop from "./ToTop";
 const Layout = ({ children }) => {
   return (
     <div className={styles.container}>
@@ -18,7 +19,8 @@ const Layout = ({ children }) => {
         <SvgBackground />
         {children}
       </main>
-      {/* footer */}
+      <ToTop />
+      <Footer />
     </div>
   );
 };

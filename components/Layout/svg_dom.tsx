@@ -14,10 +14,10 @@ const SvgAnimate = (): SVGAnimateElement => {
 const SvgImage = (href: string): SVGImageElement => {
   const image = document.createElementNS(namespaceURI, "image");
   image.setAttribute("href", href);
-  image.setAttribute("x", "-5");
-  image.setAttribute("y", "-5");
-  image.setAttribute("height", "102%");
-  image.setAttribute("width", "102%");
+  image.setAttribute("x", "-4%");
+  image.setAttribute("y", "-4%");
+  image.setAttribute("height", "108%");
+  image.setAttribute("width", "108%");
   image.setAttribute("preserveAspectRatio", "xMidYMid slice");
   image.style.filter = "url(#svg_blurfilter)";
   return image;
