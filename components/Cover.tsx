@@ -6,6 +6,7 @@ const SiteCover = () => {
         <div>
           <img
             src="https://www.nazo.run/wp-content/uploads/2022/03/illust_65428259_20171016_002622-scaled-e1648370671156.jpg"
+            alt="avatar"
             className={styles.avatar}
           />
         </div>

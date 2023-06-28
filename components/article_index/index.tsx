@@ -9,7 +9,8 @@ const ArticleIndex = () => {
       time: "2021-01-01",
       content: "百度一下，你就知道",
       category: "搜索引擎",
-      cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
+      cover:
+        "https://fp1.fghrsh.net/2020/01/14/7249e2902b45b4620019519a82db1d2e.jpg!q80.webp",
     },
     {
       id: 2,
@@ -18,7 +19,8 @@ const ArticleIndex = () => {
       time: "2021-01-01",
       content: "谷歌一下，你就知道",
       category: "搜索引擎",
-      cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
+      cover:
+        "https://fp1.fghrsh.net/2020/01/14/7249e2902b45b4620019519a82db1d2e.jpg!q80.webp",
     },
   ];
   return (

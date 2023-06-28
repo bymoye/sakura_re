@@ -7,6 +7,17 @@
     width: 55%;
 }
 
+
+.image_a {
+        height: 300px;
+    position: relative;
+    display: block;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    border-radius: 0 10px 10px 0;
+}
+
 .post_thumb_img {
     width: 100%;
     height: 100%;
@@ -25,6 +36,16 @@
     transform: translateY(80px);
     transition: all .5s ease;
     animation: main .5s;
+    width: 100%;
+}
+
+.post_list_thumb:hover{
+    box-shadow: 0 1px 20px -8px #000;
+}
+
+.post_list_thumb:hover .post_thumb_img{
+    -webkit-filter: saturate(1) blur(0px);
+    filter: saturate(1) blur(0px);
 }
 
 .post_list_show{

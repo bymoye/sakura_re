@@ -1,8 +1,9 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import styles from "../../styles/Article.module.css";
 
 const Article = ({ title, time, content, category, url, cover, id }) => {
   const articleRef = useRef(null);
+  const [hover, setHover] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -29,12 +30,19 @@ const Article = ({ title, time, content, category, url, cover, id }) => {
   return (
     <article ref={articleRef} className={styles.post_list_thumb} key={id}>
       <div className={styles.post_thumb}>
-        <img
-          src={cover}
-          alt={title}
-          className={styles.post_thumb_img}
-          loading="lazy"
-        />
+        <a
+          href={url}
+          className={styles.image_a}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src={cover}
+            alt={title}
+            className={styles.post_thumb_img}
+            loading="lazy"
+          />
+        </a>
       </div>
       <div className={styles.post_content_wrap}>
         <div className="title">{title}</div>
